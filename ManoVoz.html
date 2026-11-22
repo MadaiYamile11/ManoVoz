@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3B261B">
+<title>ManoVoz | Aprende lengua de señas</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<!-- Todo el contenido de la página queda dentro de este bloque. -->
+<main class="shell">
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">✋</div>
+    <div>Mano<span>Voz</span></div>
+  </div>
+  <div class="top-tag">Aprende · Comunica · Incluye</div>
+</header>
+
+<!-- Primera pantalla que ve quien entra a ManoVoz. -->
+<section id="home" class="view">
+  <div class="hero">
+    <div class="eyebrow"><span class="dot"></span> Aprendizaje inclusivo con tecnología</div>
+    <h1>Las manos también tienen <span>mucho que decir.</span></h1>
+    <p class="hero-copy">Descubre la Lengua de Señas Mexicana paso a paso. Observa los movimientos, practica frente a la cámara y aprende a tu propio ritmo en un espacio creado para acercarnos a través de la comunicación.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" id="goSetup">Comenzar a aprender <span>→</span></button>
+      <button class="btn btn-ghost" id="howWorks">¿Cómo funciona?</button>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="feature"><div class="feature-icon">🌎</div><div><strong>Aprende LSM</strong><small>Conoce una lengua visual con identidad y gramática propias.</small></div></div>
+    <div class="feature"><div class="feature-icon">✋</div><div><strong>Observa y repite</strong><small>Reproduce los videos y practica cada movimiento.</small></div></div>
+    <div class="feature"><div class="feature-icon">📷</div><div><strong>Practica con cámara</strong><small>Observa tus manos y sus puntos de referencia.</small></div></div>
+  </div>
+</section>
+
+<!-- Los datos se piden aquí y se guardan en el navegador. -->
+<section id="setup" class="panel view hidden">
+  <div class="panel-head">
+    <div><h2>Prepara tu aprendizaje</h2><p class="sub">Personaliza tu espacio antes de comenzar.</p></div>
+    <span class="step-pill">PASO 1 DE 2</span>
+  </div>
+
+  <div class="form-grid">
+    <div class="field"><label for="email">Correo para guardar tu progreso</label><input id="email" type="email" placeholder="tunombre@correo.com" autocomplete="email" required></div>
+    <div class="field"><label for="name">¿Cómo te llamas? (opcional)</label><input id="name" type="text" placeholder="Escribe tu nombre" autocomplete="given-name"></div>
+    <div class="field"><label for="uiLanguage">Idioma de la página</label><select id="uiLanguage"><option>Español</option><option>English</option></select></div>
+    <div class="field"><label for="signLanguage">Lengua de señas que quieres aprender</label><select id="signLanguage"><option>Lengua de Señas Mexicana (LSM)</option></select></div>
+    <div class="field"><label for="topic">Tema que quieres practicar</label>
+      <select id="topic">
+        <option>Abecedario</option>
+        <option>Números</option>
+        <option>Saludos</option>
+        <option>Palabras básicas</option>
+        <option>Frases</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="level-block">
+    <label class="level-title">Selecciona tu nivel</label>
+    <div class="levels">
+      <div class="level-option"><input type="radio" name="level" id="beginner" value="Principiante" checked><label for="beginner"><span><strong>🌱 Principiante</strong><small>Primeros pasos y señas básicas.</small></span></label></div>
+      <div class="level-option"><input type="radio" name="level" id="intermediate" value="Intermedio"><label for="intermediate"><span><strong>🌿 Intermedio</strong><small>Más palabras y expresiones.</small></span></label></div>
+      <div class="level-option"><input type="radio" name="level" id="advanced" value="Avanzado"><label for="advanced"><span><strong>🚀 Avanzado</strong><small>Frases y práctica más compleja.</small></span></label></div>
+    </div>
+  </div>
+
+  <div class="actions-row">
+    <button class="btn btn-primary" id="start">Ir a la práctica →</button>
+    <button class="btn btn-ghost" id="backHome">Volver</button>
+  </div>
+  <p class="disclaimer">Las lenguas de señas no son universales. Esta versión se enfoca en LSM y sus ejemplos deben consultarse con materiales confiables.</p>
+</section>
+
+<!-- En esta sección se muestran el material y la cámara. -->
+<section id="practice" class="view hidden">
+  <div class="panel-head practice-head">
+    <div><h2 id="practiceTitle">Tu espacio de práctica</h2><p class="sub" id="welcome">¡Vamos a aprender!</p></div>
+    <div class="account-actions">
+      <span class="step-pill">TU ESPACIO DE APRENDIZAJE</span>
+      <button class="btn btn-ghost" id="changeAccount" type="button">Cambiar cuenta / salir</button>
+    </div>
+  </div>
+
+  <div class="panel encouragement">
+    <strong>¡Tú puedes!</strong>
+    <span>La constancia es la clave para comunicar sin límites.</span>
+  </div>
+
+  <div class="learning-grid">
+    <article class="guide-card reference-card">
+      <div class="guide-head"><h3>▣ &nbsp;Observa el movimiento</h3><span class="tag">VIDEO DE REFERENCIA</span></div>
+      <p class="guide-description" id="guideText">Observa el movimiento y repítelo frente a la cámara.</p>
+      <div class="field reference-picker">
+        <label for="practiceItem">Selecciona una letra o material para practicar</label>
+        <select id="practiceItem" aria-label="Seleccionar material de LSM"></select>
+      </div>
+      <div class="resource-frame">
+        <video id="referenceVideo" class="reference-video" controls playsinline preload="metadata">Tu navegador no puede reproducir este video.</video>
+        <iframe id="referenceFrame" title="Video de aprendizaje de Lengua de Señas Mexicana" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen hidden></iframe>
+        <div class="frame-fallback" id="frameFallback">El video de práctica aparecerá aquí, dentro de ManoVoz.</div>
+      </div>
+      <p class="demo-caption" id="demoCaption">Material de referencia de LSM. Selecciona una letra para cambiar el ejemplo.</p>
+      <div class="demo-controls">
+        <a class="btn btn-primary" id="openReference" href="https://www.educacionincluyente.org/" target="_blank" rel="noopener">Ver fuente original ↗</a>
+        <button class="btn btn-ghost" id="reloadReference" type="button">↻ Recargar video</button>
+      </div>
+      <p class="source-credit" id="sourceCredit">Material educativo de referencia para LSM.</p>
+    </article>
+
+    <article class="camera-card call-card">
+      <div class="guide-head"><h3>▣ &nbsp;Practica frente a la cámara</h3><span class="tag">TU PRÁCTICA</span></div>
+      <p class="guide-description">Mira el video y repite el movimiento mientras te observas aquí.</p>
+      <div class="camera-stage" id="cameraStage">
+        <div class="call-label">● EN VIVO <span>Tú</span></div>
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div id="placeholder" class="placeholder">Tu cámara aparecerá aquí.<br>Actívala cuando estés listo.</div>
+      </div>
+      <div class="camera-adjustments">
+        <label for="cameraZoom">Acercamiento <output id="zoomValue">1.0×</output></label>
+        <input id="cameraZoom" type="range" min="1" max="2.5" step="0.1" value="1">
+        <label for="cameraHeight">Tamaño de ventana <output id="heightValue">420 px</output></label>
+        <input id="cameraHeight" type="range" min="280" max="620" step="10" value="420">
+      </div>
+      <details class="position-guide">
+        <summary>Cómo colocar el brazo y la mano</summary>
+        <p>Procura mantener el hombro, el codo, la muñeca y la mano dentro del encuadre. La imagen es una referencia general; cada seña puede necesitar una posición distinta.</p>
+        <img class="arm-guide" src="https://www.clipartmax.com/png/middle/43-434229_arm-clip-art.png" alt="Ilustración de un brazo doblado con la mano abierta y los dedos extendidos" loading="lazy">
+        <a class="guide-image-link" href="https://www.clipartmax.com/png/middle/43-434229_arm-clip-art.png" target="_blank" rel="noopener">Abrir imagen para guardarla ↗</a>
+        <small class="guide-image-credit">Imagen de referencia: <a href="https://www.clipartmax.com/middle/m2i8H7i8Z5G6H7H7_arm-clip-art/" target="_blank" rel="noopener">ClipartMax</a>.</small>
+      </details>
+      <div class="subtitle" id="subtitle" aria-live="polite">Tu práctica aparecerá aquí.</div>
+      <div class="status" id="status">Pulsa “Activar cámara” para comenzar.</div>
+      <div class="camera-actions">
+        <button class="btn btn-primary" id="activate">Activar cámara</button>
+        <button class="btn btn-ghost" id="newChallenge" type="button">Otra práctica ↻</button>
+        <button class="btn btn-ghost" id="stop">Apagar cámara</button>
+      </div>
+    </article>
+  </div>
+
+  <div class="panel tips-panel">
+    <div><strong>Sobre esta práctica</strong><p class="disclaimer">Observa con atención la forma y orientación de la mano. Repite el movimiento a tu ritmo y consulta fuentes de LSM para confirmar cada seña.</p></div>
+    <div><strong>Consejos para practicar</strong><p class="disclaimer">Busca buena iluminación, mantén las manos dentro del encuadre y pausa el video cuando necesites observar un detalle.</p></div>
+  </div>
+
+  <p class="disclaimer">Aviso: la cámara detecta puntos de referencia de las manos, pero todavía no identifica ni califica automáticamente qué seña realizas. Para esa función se necesita un modelo entrenado y validado con ejemplos de LSM.</p>
+  <button class="back-link" id="backSetup">← Cambiar mis opciones</button>
+</section>
+
+<div class="how-overlay hidden" id="howModal" role="dialog" aria-modal="true" aria-labelledby="howTitle">
+  <section class="how-modal">
+    <button class="how-close" id="closeHow" type="button" aria-label="Cerrar">×</button>
+    <div class="eyebrow"><span class="dot"></span> CONOCE MANOVOZ</div>
+    <h2 id="howTitle">¿Qué es ManoVoz?</h2>
+    <p>ManoVoz es una página educativa diseñada para acercar a estudiantes a la Lengua de Señas Mexicana (LSM) mediante materiales visuales y práctica interactiva. Su propósito es promover el aprendizaje, la comunicación y la inclusión.</p>
+    <div class="how-steps">
+      <div class="how-step"><strong>1. Crea tu perfil</strong><p>Escribe un correo para identificar tu perfil en este dispositivo y conservar tus datos de práctica.</p></div>
+      <div class="how-step"><strong>2. Elige qué aprender</strong><p>Selecciona un tema y tu nivel: principiante, intermedio o avanzado.</p></div>
+      <div class="how-step"><strong>3. Observa las señas</strong><p>Consulta el video de referencia, pausa cuando lo necesites y repite los movimientos.</p></div>
+      <div class="how-step"><strong>4. Practica con la cámara</strong><p>Activa la cámara para ver tu mano y los puntos que detecta el sistema.</p></div>
+    </div>
+    <p><strong>Importante:</strong> la cámara detecta puntos de referencia de las manos, pero esta versión todavía no reconoce ni califica automáticamente las señas. Los videos son material de apoyo; conviene aprender con personas y fuentes especializadas en LSM.</p>
+    <div class="privacy-note"><strong>Privacidad:</strong> este prototipo guarda el correo y las preferencias únicamente en el almacenamiento local del navegador. No envía el correo a un servidor ni permite recuperar el perfil en otro dispositivo. Para una demostración escolar, usa un correo de prueba y no ingreses información personal sensible.</div>
+    <div class="actions-row"><button class="btn btn-primary" id="understoodHow" type="button">Entendido</button></div>
+  </section>
+</div>
+
+<footer>ManoVoz · La tecnología que conecta a través de las señas.</footer>
+</main>
+
+<script type="module">
+function obtenerElemento(id) {
+  return document.getElementById(id);
+}
+let camara = null;
+let detectorManos = null;
+let detectorBrazos = null;
+let animacion = 0;
+const secciones = ["home", "setup", "practice"];
+const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+// Los videos se organizan por tema para que sea más sencillo cambiarlos.
+const materiales={
+ "Abecedario":{
+   kind:"mp4",
+   label:"Abecedario en LSM",
+   video:"https://www.educacionincluyente.org/wp-content/uploads/2019/10/Video-ABC.mp4",
+   url:"https://www.educacionincluyente.org/",
+   caption:"Video del abecedario en Lengua de Señas Mexicana. El video muestra el alfabeto completo; selecciona una letra para enfocarte en ella.",
+   credit:"Video: Educación Incluyente, A.C. · Abecedario en Lengua de Señas Mexicana."
+ },
+ "Números":{
+   kind:"youtube",
+   label:"Números en LSM",
+   video:"1pLA_oJwCmw",
+   url:"https://www.youtube.com/watch?v=1pLA_oJwCmw",
+   caption:"Video de números en Lengua de Señas Mexicana. Observa y pausa para repetir cada ejemplo.",
+   credit:"Video: ¡Aprende Lengua de Señas Mexicana! · Números del 1 al millón."
+ },
+ "Saludos":{
+   kind:"mp4",
+   label:"Saludos en LSM",
+   video:"https://www.educacionincluyente.org/wp-content/uploads/2022/02/Saludos-en-LSM.mp4",
+   url:"https://www.educacionincluyente.org/",
+   caption:"Video de saludos y expresiones cotidianas en LSM: observa cada seña y repítela frente a la cámara.",
+   credit:"Video: Educación Incluyente, A.C. · Saludos en LSM."
+ },
+ "Palabras básicas":{
+   kind:"mp4",
+   label:"Expresiones básicas en LSM",
+   video:"https://www.educacionincluyente.org/wp-content/uploads/2022/02/Saludos-en-LSM.mp4",
+   url:"https://www.educacionincluyente.org/",
+   caption:"Para comenzar, practica expresiones básicas de cortesía y comunicación. Este material incluye saludos y expresiones cotidianas.",
+   credit:"Video: Educación Incluyente, A.C. · Saludos en LSM."
+ },
+ "Frases":{
+   kind:"mp4",
+   label:"Frases y expresiones en LSM",
+   video:"https://www.educacionincluyente.org/wp-content/uploads/2022/02/Saludos-en-LSM.mp4",
+   url:"https://www.educacionincluyente.org/",
+   caption:"Practica las expresiones del video. Puedes pausar, repetir y observarte al mismo tiempo en la cámara.",
+   credit:"Video: Educación Incluyente, A.C. · Saludos en LSM."
+ }
+};
+
+// Retos de texto para practicar. No representan una lectura automática de la cámara.
+const retosPorTema={
+ "Abecedario":letras,
+ "Números":["1","2","3","4","5","6","7","8","9","10"],
+ "Saludos":["HOLA","BUENOS DÍAS","BUENAS TARDES","BUENAS NOCHES","ADIÓS"],
+ "Palabras básicas":["GRACIAS","POR FAVOR","AGUA","CASA","AMIGO/A"],
+ "Frases":["¿CÓMO ESTÁS?","MI NOMBRE ES…","MUCHO GUSTO","¿CÓMO TE LLAMAS?"]
+};
+
+// Solo una de estas pantallas queda visible a la vez.
+function show(id){
+  secciones.forEach(v=>obtenerElemento(v).classList.toggle("hidden",v!==id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// Actualiza el video y el texto cuando se cambia el tema.
+function mostrarReto(valor){
+  const tema=obtenerElemento("topic").value;
+  const nombre=tema==="Abecedario"?"Letra":"Reto";
+  obtenerElemento("subtitle").textContent=nombre+": "+valor;
+  obtenerElemento("guideText").textContent="Toma el video como apoyo y practica este reto frente a la cámara. No todos los retos tienen un clip individual.";
+}
+
+function renderReference(){
+  const topic=obtenerElemento("topic").value;
+  const data=materiales[topic]||materiales["Abecedario"];
+  const picker=obtenerElemento("practiceItem");
+  const previous=picker.value;
+  const opciones=[...(retosPorTema[topic]||retosPorTema["Abecedario"])];
+  if(topic==="Saludos"||topic==="Palabras básicas"||topic==="Frases"){
+    opciones.sort((a,b)=>a.localeCompare(b,"es",{sensitivity:"base"}));
+  }
+
+  picker.innerHTML="";
+  opciones.forEach(valor=>{
+    const option=document.createElement("option");
+    option.value=valor;
+    option.textContent=topic==="Abecedario"?"Letra "+valor:valor;
+    picker.appendChild(option);
+  });
+
+  // Mantiene la opción anterior si existe; de lo contrario elige una al azar.
+  picker.value=opciones.includes(previous)
+    ? previous
+    : opciones[Math.floor(Math.random()*opciones.length)];
+
+  const video=obtenerElemento("referenceVideo");
+  const frameEl=obtenerElemento("referenceFrame");
+  obtenerElemento("openReference").href=data.url;
+  obtenerElemento("frameFallback").textContent="Si el video no carga, revisa tu conexión a internet o abre la fuente original.";
+
+  if(data.kind==="mp4"){
+    frameEl.hidden=true;
+    frameEl.src="about:blank";
+    video.hidden=false;
+    video.src=data.video;
+    video.load();
+  }else{
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+    video.hidden=true;
+    frameEl.hidden=false;
+    frameEl.src="https://www.youtube-nocookie.com/embed/"+data.video+"?rel=0";
+  }
+
+  const item=picker.value;
+  obtenerElemento("demoCaption").textContent=data.caption;
+  obtenerElemento("sourceCredit").textContent=data.credit;
+  mostrarReto(item);
+}
+try{
+  const saved=JSON.parse(localStorage.getItem("manovoz_perfil")||"null");
+  if(saved){
+    obtenerElemento("email").value=saved.email||"";
+    obtenerElemento("name").value=saved.name||"";
+    if(saved.language)obtenerElemento("signLanguage").value=saved.language;
+    if(saved.topic)obtenerElemento("topic").value=saved.topic;
+    const levelInput=document.querySelector('input[name="level"][value="'+saved.level+'"]');
+    if(levelInput)levelInput.checked=true;
+  }
+}catch(e){}
+
+// Coloca en pantalla las opciones que eligió la persona.
+function enterPractice(profile){
+  obtenerElemento("email").value=profile.email||"";
+  obtenerElemento("name").value=profile.name||"";
+  if(profile.language)obtenerElemento("signLanguage").value=profile.language;
+  if(profile.topic)obtenerElemento("topic").value=profile.topic;
+
+  const levelInput=document.querySelector('input[name="level"][value="'+(profile.level||"Principiante")+'"]');
+  if(levelInput)levelInput.checked=true;
+
+  const language=profile.language||obtenerElemento("signLanguage").value;
+  const level=profile.level||"Principiante";
+  const topic=profile.topic||obtenerElemento("topic").value;
+
+  obtenerElemento("practiceTitle").textContent="Práctica: "+topic;
+  obtenerElemento("welcome").textContent=(profile.name?"¡Hola, "+profile.name+"! ":"¡Comencemos! ")+"Elegiste "+language+" · Nivel "+level+".";
+  renderReference();
+  show("practice");
+}
+
+obtenerElemento("goSetup").onclick=()=>{
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem("manovoz_perfil")||"null")}catch(e){}
+  if(saved&&saved.email)enterPractice(saved);
+  else show("setup");
+};
+
+obtenerElemento("changeAccount").onclick=async()=>{
+  await stopCamera();
+  try{
+    localStorage.removeItem("manovoz_perfil");
+    localStorage.removeItem("manovoz_ultimo_correo");
+  } catch (error) { /* Si el navegador no permite guardar, la página puede continuar. */ }
+  obtenerElemento("email").value="";
+  obtenerElemento("name").value="";
+  obtenerElemento("topic").value="Abecedario";
+  obtenerElemento("signLanguage").selectedIndex=0;
+  const beginner=document.querySelector('input[name="level"][value="Principiante"]');
+  if(beginner)beginner.checked=true;
+  show("setup");
+  obtenerElemento("email").focus();
+};
+
+function openHow(){
+  obtenerElemento("howModal").classList.remove("hidden");
+  obtenerElemento("closeHow").focus();
+}
+function closeHow(){
+  obtenerElemento("howModal").classList.add("hidden");
+  obtenerElemento("howWorks").focus();
+}
+
+obtenerElemento("howWorks").onclick=openHow;
+obtenerElemento("closeHow").onclick=closeHow;
+obtenerElemento("understoodHow").onclick=closeHow;
+obtenerElemento("howModal").addEventListener("click",e=>{
+  if(e.target===obtenerElemento("howModal"))closeHow();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&!obtenerElemento("howModal").classList.contains("hidden"))closeHow();
+});
+
+obtenerElemento("backHome").onclick=()=>show("home");
+obtenerElemento("topic").addEventListener("change",renderReference);
+
+obtenerElemento("practiceItem").addEventListener("change",()=>{
+  mostrarReto(obtenerElemento("practiceItem").value);
+});
+
+obtenerElemento("newChallenge").onclick=()=>{
+  const picker=obtenerElemento("practiceItem");
+  const opciones=Array.from(picker.options).map(option=>option.value);
+  if(!opciones.length)return;
+
+  let siguiente=opciones[Math.floor(Math.random()*opciones.length)];
+  if(opciones.length>1){
+    while(siguiente===picker.value){
+      siguiente=opciones[Math.floor(Math.random()*opciones.length)];
+    }
+  }
+  picker.value=siguiente;
+  mostrarReto(siguiente);
+};
+
+obtenerElemento("reloadReference").onclick=()=>renderReference();
+
+obtenerElemento("start").onclick=()=>{
+  const email=obtenerElemento("email").value.trim().toLowerCase();
+  if(!email||!obtenerElemento("email").checkValidity()){
+    obtenerElemento("email").reportValidity();
+    obtenerElemento("email").focus();
+    return;
+  }
+
+  const name=obtenerElemento("name").value.trim();
+  const language=obtenerElemento("signLanguage").value;
+  const level=document.querySelector('input[name="level"]:checked').value;
+  const topic=obtenerElemento("topic").value;
+  const profile={email,name,language,level,topic,lastVisit:new Date().toISOString()};
+
+  try{
+    localStorage.setItem("manovoz_perfil",JSON.stringify(profile));
+    localStorage.setItem("manovoz_ultimo_correo",email);
+  }catch(e){
+    alert("No se pudo guardar el perfil en este navegador. Puedes continuar, pero los datos podrían no conservarse.");
+  }
+
+  enterPractice(profile);
+};
+
+obtenerElemento("backSetup").onclick=async()=>{
+  await stopCamera();
+  show("setup");
+};
+
+function status(t){obtenerElemento("status").textContent=t}
+
+// Detiene la cámara y también limpia el dibujo de los puntos.
+async function stopCamera(){
+  if(animacion)cancelAnimationFrame(animacion);
+  animacion=0;
+  if(camara)camara.getTracks().forEach(t=>t.stop());
+  camara=null;
+  obtenerElemento("video").srcObject=null;
+  obtenerElemento("placeholder").classList.remove("hidden");
+  obtenerElemento("overlay").width=1;
+  obtenerElemento("overlay").height=1;
+  if(obtenerElemento("practiceItem").value)mostrarReto(obtenerElemento("practiceItem").value);else obtenerElemento("subtitle").textContent="Elige un reto para comenzar.";
+}
+
+obtenerElemento("stop").onclick=stopCamera;
+
+// Estos controles cambian solo el encuadre que se muestra en pantalla.
+obtenerElemento("cameraZoom").addEventListener("input",e=>{
+  const zoom=Number(e.target.value);
+  obtenerElemento("cameraStage").style.setProperty("--camera-zoom",String(zoom));
+  obtenerElemento("zoomValue").textContent=zoom.toFixed(1)+"×";
+});
+obtenerElemento("cameraHeight").addEventListener("input",e=>{
+  const height=Number(e.target.value);
+  obtenerElemento("cameraStage").style.height=height+"px";
+  obtenerElemento("heightValue").textContent=height+" px";
+});
+
+obtenerElemento("activate").onclick=async()=>{
+  await stopCamera();
+
+  if(!navigator.mediaDevices?.getUserMedia){
+    status("No se puede solicitar la cámara desde esta dirección. Abre la página mediante HTTPS o localhost; abrir el archivo directamente puede bloquearla.");
+    return;
+  }
+  if(!window.isSecureContext){
+    status("Esta dirección no es segura para usar la cámara. Abre ManoVoz desde HTTPS o localhost.");
+    return;
+  }
+
+  try{
+    status("Solicitando permiso para usar la cámara…");
+    camara=await navigator.mediaDevices.getUserMedia({
+      audio:false,
+      video:{facingMode:"user",width:{ideal:1280},height:{ideal:720}}
+    });
+    obtenerElemento("video").srcObject=camara;
+    await obtenerElemento("video").play();
+    obtenerElemento("placeholder").classList.add("hidden");
+    mostrarReto(obtenerElemento("practiceItem").value);
+    status("Cámara conectada. Cargando detector de manos…");
+    await loadDetector();
+    if(detectorManos)detect();
+  }catch(e){
+    let msg="No se pudo abrir la cámara.";
+    if(["NotAllowedError","PermissionDeniedError"].includes(e.name))msg="El acceso fue bloqueado. Revisa el permiso de cámara de este sitio en Chrome y los ajustes de privacidad de Android.";
+    if(e.name==="NotFoundError")msg="No se encontró una cámara disponible.";
+    if(e.name==="NotReadableError")msg="La cámara podría estar ocupada por otra aplicación. Cierra otras apps que la usen.";
+    status(msg+" ("+(e.name||"Error")+")");
+    obtenerElemento("subtitle").textContent="No se pudo activar la cámara.";
+  }
+};
+
+// Esta herramienta encuentra puntos de la mano; no interpreta señas completas.
+async function loadDetector(){
+  try{
+    const vision=await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14");
+    const files=await vision.FilesetResolver.forVisionTasks(
+      "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm"
+    );
+
+    try{
+      detectorManos=await vision.HandLandmarker.createFromOptions(files,{
+        baseOptions:{
+          modelAssetPath:"https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+          delegate:"GPU"
+        },
+        runningMode:"VIDEO",
+        numHands:2
+      });
+    }catch(error){
+      detectorManos=null;
+    }
+
+    try{
+      detectorBrazos=await vision.PoseLandmarker.createFromOptions(files,{
+        baseOptions:{
+          modelAssetPath:"https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+          delegate:"GPU"
+        },
+        runningMode:"VIDEO",
+        numPoses:1
+      });
+    }catch(error){
+      detectorBrazos=null;
+    }
+
+    if(detectorManos||detectorBrazos){
+      const partes=[];
+      if(detectorManos)partes.push("manos");
+      if(detectorBrazos)partes.push("brazos");
+      status("Detector listo: se están localizando "+partes.join(" y ")+". No reconoce señas completas.");
+    }else{
+      status("No se pudieron cargar los detectores. Revisa tu conexión a internet.");
+    }
+  }catch(e){
+    status("No se pudo cargar MediaPipe. Revisa tu conexión a internet.");
+  }
+}
+
+// Se repite mientras la cámara está encendida para actualizar los puntos.
+function detect(){
+  if(!camara)return;
+  const v=obtenerElemento("video");
+  const c=obtenerElemento("overlay");
+  const ctx=c.getContext("2d");
+
+  if(v.readyState>=2&&(detectorManos||detectorBrazos)){
+    if(c.width!==v.videoWidth||c.height!==v.videoHeight){
+      c.width=v.videoWidth;
+      c.height=v.videoHeight;
+    }
+    ctx.clearRect(0,0,c.width,c.height);
+
+    try{
+      // Puntos de las manos y líneas de los dedos.
+      const tiempo=performance.now();
+      const resultadoManos=detectorManos
+        ? detectorManos.detectForVideo(v,tiempo).landmarks||[]
+        : [];
+      const resultadoBrazos=detectorBrazos
+        ? detectorBrazos.detectForVideo(v,tiempo).landmarks||[]
+        : [];
+
+      if(detectorManos){
+        const hands=resultadoManos;
+        hands.forEach(points=>{
+          ctx.fillStyle="#F4EBDD";
+          ctx.strokeStyle="#AA6547";
+          ctx.lineWidth=3;
+
+          const dentro=(p)=>p&&p.x>=0&&p.x<=1&&p.y>=0&&p.y<=1;
+          points.forEach(p=>{
+            if(!dentro(p))return;
+            ctx.beginPath();
+            ctx.arc(p.x*c.width,p.y*c.height,5,0,Math.PI*2);
+            ctx.fill();
+          });
+
+          [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]].forEach(([a,b])=>{
+            if(!dentro(points[a])||!dentro(points[b]))return;
+            ctx.beginPath();
+            ctx.moveTo(points[a].x*c.width,points[a].y*c.height);
+            ctx.lineTo(points[b].x*c.width,points[b].y*c.height);
+            ctx.stroke();
+          });
+        });
+      }
+
+      // PoseLandmarker ubica hombros, codos y muñecas para mostrar los brazos.
+      if(detectorBrazos){
+        const poses=resultadoBrazos;
+        poses.forEach(pose=>{
+          const segmentos=[[11,13],[13,15],[12,14],[14,16]];
+          ctx.strokeStyle="#E8B887";
+          ctx.fillStyle="#FFF9F0";
+          ctx.lineWidth=6;
+          ctx.lineCap="round";
+
+          segmentos.forEach(([a,b])=>{
+            const inicio=pose[a];
+            const fin=pose[b];
+            const visible=(p)=>p&&(p.visibility??1)>0.45&&p.x>=0&&p.x<=1&&p.y>=0&&p.y<=1;
+            if(visible(inicio)&&visible(fin)){
+              ctx.beginPath();
+              ctx.moveTo(inicio.x*c.width,inicio.y*c.height);
+              ctx.lineTo(fin.x*c.width,fin.y*c.height);
+              ctx.stroke();
+            }
+          });
+
+          [11,12,13,14,15,16].forEach(i=>{
+            const punto=pose[i];
+            if(punto&&(punto.visibility??1)>0.45&&punto.x>=0&&punto.x<=1&&punto.y>=0&&punto.y<=1){
+              ctx.beginPath();
+              ctx.arc(punto.x*c.width,punto.y*c.height,7,0,Math.PI*2);
+              ctx.fill();
+            }
+          });
+        });
+      }
+
+      const manos=resultadoManos.length;
+      const brazos=resultadoBrazos.length;
+      status((manos?"Manos localizadas. ":"")+(brazos?"Brazos localizados. ":"")+
+        (manos||brazos?"Los puntos son referencias visuales, no evaluación de la seña.":"Acércate un poco y procura que tus hombros, brazos y manos queden dentro de la imagen."));
+    }catch(e){
+      status("No se pudo actualizar el seguimiento. Intenta acomodarte frente a la cámara.");
+    }
+  }
+
+  animacion=requestAnimationFrame(detect);
+}
+</script>
+</body>
+</html>
